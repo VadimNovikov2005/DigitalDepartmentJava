@@ -1,14 +1,15 @@
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
 public class Student {
-    String name;
-    int group;
-    int course;
-    int[] marks;
-    float averageScore;
+    private String name;
+    private int group;
+    private int course;
+    private int[] marks;
+    private float averageScore;
 
     public static void inputStudent(List<Student> students, int countStudents) {
         Scanner scanner = new Scanner(System.in);
@@ -20,7 +21,7 @@ public class Student {
             student.group = scanner.nextInt();
             System.out.print("Course: ");
             student.course = scanner.nextInt();
-            System.out.print("Marks: ");
+            System.out.println("Marks:");
             String ch = scanner.next();
             String[] marks = ch.split(",");
             student.marks = new int[marks.length];
@@ -35,9 +36,11 @@ public class Student {
     }
 
     public static void sortStudent(List<Student> students) {
-        for(Student student: students) {
+        Iterator<Student> studentIterator = students.iterator();
+        while(studentIterator.hasNext()) {
+            Student student = studentIterator.next();
             if(student.averageScore < 3.0) {
-                students.remove(student);
+                studentIterator.remove();
             }
             else {
                 student.course++;
